@@ -1,0 +1,29 @@
+{% extends "baseEmployees.html" %}
+{% load static %}
+{% block page_content %}
+
+<div class="row">
+    <table class="table table-striped text-xlarge">
+        <thead class="thead">
+        <tr>
+            <th style="font-family:'Arial',serif;font-size:20pt" scope="col" >Name</th>
+            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Contract Type</th>
+            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Role Name</th>
+            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Role Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.name }}</td>
+            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.contractTypeName }}</td>
+            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.roleName }}</td>
+            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.roleDescription }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
