@@ -9,6 +9,9 @@ from rest_framework import status
 from project.api.app_employees.models import Employees, MyEndpoints
 from project.utils.employee_utils import completeEmployeeInfo
 
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg.openapi import TYPE_NUMBER, Schema, TYPE_OBJECT
+
 import requests
 
 
@@ -23,6 +26,17 @@ class EmployeeInformation(APIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [HasAPIKey, IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_summary="Employee Data",
+        operation_description="Service to get employee information",
+        request_body=Schema(title="Employeee information", type=TYPE_OBJECT, description="Filter to visualize a specific employee",
+                            properties={
+                                "id": Schema(type=TYPE_NUMBER, description="Employee id, it can be null")
+                                }
+                            ),
+        responses={200: 'List of employees',
+                   500: 'There was a problem processing the request'}
+    )
     def get(self, request):
         id = None
         if 'id' in request.data:
@@ -37,6 +51,12 @@ class EmployeeInformation(APIView):
         except Exception as e:
             return Response(e, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    @swagger_auto_schema(
+        operation_summary="Employee Data API consumption",
+        operation_description="Service to consume the MAS Global consulting API and send it to a table in sqlite",
+        responses={200: 'Operation Result',
+                   417: 'Expectation Failed'}
+    )
     def post(self, request):
         my_endpoint = MyEndpoints.objects.filter(descriptor='employees')
         if len(my_endpoint) == 1:
