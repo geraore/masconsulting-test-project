@@ -29,11 +29,6 @@ class EmployeeInformation(APIView):
     @swagger_auto_schema(
         operation_summary="Employee Data",
         operation_description="Service to get employee information",
-        request_body=Schema(title="Employeee information", type=TYPE_OBJECT, description="Filter to visualize a specific employee",
-                            properties={
-                                "id": Schema(type=TYPE_NUMBER, description="Employee id, it can be null")
-                                }
-                            ),
         responses={200: 'List of employees',
                    500: 'There was a problem processing the request'}
     )
