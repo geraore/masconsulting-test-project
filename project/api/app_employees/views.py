@@ -10,7 +10,6 @@ from project.api.app_employees.models import Employees, MyEndpoints
 from project.utils.employee_utils import completeEmployeeInfo
 
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg.openapi import TYPE_NUMBER, Schema, TYPE_OBJECT
 
 import requests
 

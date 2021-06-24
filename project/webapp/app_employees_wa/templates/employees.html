@@ -1,29 +1,55 @@
-{% extends "baseEmployees.html" %}
+{% extends "baseWebappTemplate.html" %}
 {% load static %}
 {% block page_content %}
 
-<div class="row">
-    <table class="table table-striped text-xlarge">
-        <thead class="thead">
-        <tr>
-            <th style="font-family:'Arial',serif;font-size:20pt" scope="col" >Name</th>
-            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Contract Type</th>
-            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Role Name</th>
-            <th style="font-family:'Arial',serif;font-size:20pt" scope="col">Role Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for employee in employees %}
-        <tr>
-            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.name }}</td>
-            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.contractTypeName }}</td>
-            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.roleName }}</td>
-            <td style="font-family:'Arial',serif;font-size:20pt;color:{{ marcacion.color }}">{{ employee.roleDescription }}</td>
-
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="container">
+    <form action="/webapp/employee/search_employee/" method="post">
+        {% csrf_token %}
+        <p class="text-center fs-2 fw-bold"> Write the employee ID to query</p>
+        {{ form }}
+        <div class="container bg-light">
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Submit" class="btn btn-primary btn-lg">
+            </div>
+        </div>
+    </form>
 </div>
+{% if  has_value == 1 %}
+    <div class="container">
+        <div class="row">
+            <table class="table table-striped text-xlarge">
+                <thead class="thead">
+                <tr>
+                    <th scope="col" >Name</th>
+                    <th scope="col">Contract Type</th>
+                    <th scope="col">Role Id</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Role Description</th>
+                    <th scope="col">Hourly Salary</th>
+                    <th scope="col">Monthly Salary</th>
+                    <th scope="col">Annual Salary</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.contract_type_name }}</td>
+                    <td>{{ employee.role_id }}</td>
+                    <td>{{ employee.role_name }}</td>
+                    <td>{{ employee.role_description }}</td>
+                    <td>{{ employee.hourly_salary }}</td>
+                    <td>{{ employee.monthly_salary }}</td>
+                    <td>{{ employee.annual_salary }}</td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% else %}
+    <p>Nothing to show yet</p>
+{% endif %}
 
 {% endblock %}
