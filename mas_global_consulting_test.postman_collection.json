@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "f0f1c97c-79ed-4422-b522-750a2e2cebbb",
+		"name": "mas_global_consulting_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get employee data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "masconsulting",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "C35U9CVh",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "fJBNuavf.nnt1P7lnkfen7NkjkawKsbZMdJkCm2NM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":null}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/employees/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employee data",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "masconsulting",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "C35U9CVh",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "fJBNuavf.nnt1P7lnkfen7NkjkawKsbZMdJkCm2NM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/employees/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees",
+						"employee"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

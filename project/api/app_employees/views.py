@@ -32,9 +32,7 @@ class EmployeeInformation(APIView):
                 employees = Employees.objects.filter(id=id)
             else:
                 employees = Employees.objects.all().order_by('id')
-            results = []
-            for employee in employees:
-                results.append(completeEmployeeInfo(employee=employee))
+            results = [completeEmployeeInfo(employee=employee).serialize() for employee in employees]
             return Response(results, status=status.HTTP_200_OK)
         except Exception as e:
             return Response(e, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -46,10 +44,19 @@ class EmployeeInformation(APIView):
             response = requests.get(url=url)
             if response.status_code == 200:
                 Employees.objects.all().delete()
+                records = 0
+                bad_records = 0
                 for element in response.json():
-                    employee = Employees()
-                    employee.map(element)
-                    employee.save()
+                    try:
+                        employee = Employees()
+                        employee.map(element)
+                        employee.save()
+                        records += 1
+                    except Exception: #FIXME too general exception, running short on time
+                        bad_records += 1
+                return Response({'data': {'records_ok': records, 'records_bad': bad_records,
+                                          'status': 'Happy place' if bad_records == 0 else 'Not such a happy place'}},
+                                status=status.HTTP_200_OK)
             else:
                 return Response({'data': {}, 'errors': [{'type': 'fatal',
                                                          'description': 'The MAS Global API did not response'}]},

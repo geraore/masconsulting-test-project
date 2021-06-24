@@ -17,5 +17,5 @@ from django.urls import path
 from project.api.app_employees import views
 
 urlpatterns = [
-    path('employees', views.EmployeeInformation.as_view(), name='Employees'),
+    path('employee', views.EmployeeInformation.as_view(), name='Employees'),
 ]

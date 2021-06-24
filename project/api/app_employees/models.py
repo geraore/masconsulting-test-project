@@ -45,3 +45,14 @@ class Employees(models.Model):
         self.hourly_salary = json_element['hourlySalary']
         self.monthly_salary = json_element['monthlySalary']
 
+    def serialize(self):
+        return {'id': self.id,
+                'name': self.name,
+                'contractTypeName': self.contract_type_name,
+                'roleId': self.role_id,
+                'roleName': self.role_name,
+                'roleDescription': self.role_description,
+                'hourlySalary': self.hourly_salary,
+                'monthlySalary': self.monthly_salary,
+                'annualSalary': self.annual_salary}
+
